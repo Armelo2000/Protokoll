@@ -1,0 +1,24 @@
+Es soll über UART die Temperature gelesen und geschrieben werden.
+Beim Lesen von der Temperatur wird am ende vom Kommando die Taste "Enter" (0x0D) gedrückt.
+Beim Schreiben von dem Temperaturwert wird das Kommando dann die Leertaste, den Wert eingegeben und 
+zum Schluss die "Enter" Taste drücken.
+
+Das Protokoll soll so aussehen:
+
+ + Beim Lesen
+ 					CMD	ENTER
+ 	
+ + Beim Schreiben
+ 					CMD LEERTASTE WERT ENTER
+
+	- CMD das ist das Kommando/Protokoll für das Lesen oder Schreiben von Temperaturen
+			--> Lesen wird mit dem Protokoll "PROTOCOL_READ_TEMP" ausgeführt
+			--> Schreiben wird mit dem Protokoll "PROTOCOL_SET_TEMP" ausgeführt
+			
+	- ENTER das ist der Hexadecimalzahl 0x0D
+	
+	- LEERTASTE das ist der Hexadecimalzahl 0x20
+	
+	- WERT das ist der Wert von der Temperatur die geschrieben werden soll
+	
+	

@@ -1,5 +1,9 @@
 # Debug
 /Debug/*
+*.settings
+*.tmp
+*.launch
+*.ld
 
 # Prerequisites
 *.d
