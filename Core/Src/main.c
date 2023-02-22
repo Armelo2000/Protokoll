@@ -103,15 +103,16 @@ int main(void)
 	  HAL_UART_Receive(&huart1, &protocol, 1, 100);
 
 	  if(protocol == PROTOCOL_READ_TEMP){
-		  char ch[] = "Sie haben die Temperatur abgefragt.\n\rDruecken Sie die Taste \"Enter\" um zu lesen\n\r";
+		  char ch[] = "Sie haben die Temperatur abgefragt.\n\rDruecken Sie die Taste \"Enter\" um den Temperaturwert zu lesen.\n\r";
 		  HAL_UART_Transmit(&huart1, ch, sizeof(ch), 100);
 
 	  }else if(protocol == PROTOCOL_WRITE_TEMP){
-		  char ch[] = "Sie wollen neue Temperaturwert schreben.\n\rDruecken Sie die Leertaste dann geben Sie den Wert und\n\r druecken Sie zum Schluss die Taste \"Enter\"\n\r";
+		  char ch[] = "Sie versuchen gerade ein neuen Temperaturwert zu schreiben.\n\rDruecken Sie die Leertaste dann geben Sie den Wert ein \n\rund druecken Sie zum Schluss die Taste \"Enter\".\n\r";
 		  HAL_UART_Transmit(&huart1, ch, sizeof(ch), 100);
 	  }else if(protocol != 0x00){
 		  //ungültige Protokoll
-		 char error[] = "Ungueltige Protokoll. Geben ein gueltiger Protokoll ein. \n\r- Geben Sie \"r\" fuer Temperaturwert lesen oder \"w\" fuer Temperaturwert schreiben\n\n\r";
+		 char error[] = "Ungueltige Protokoll. Geben ein gueltiger Protokoll ein. \n\r- Geben Sie \"r\" (0x72) ein, um der Temperaturwert zu lesen\n\r \
+ oder \"w\" (0x77) um der neuen Temperaturwert zu schreiben.\n\n\r";
 		 HAL_UART_Transmit(&huart1, error, sizeof(error), 100);
 	  }
 
