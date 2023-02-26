@@ -114,12 +114,11 @@ int main(void)
 		 char error[] = "Ungueltige Protokoll. Geben ein gueltiger Protokoll ein. \n\r- Geben Sie \"r\" (0x72) ein, um der Temperaturwert zu lesen\n\r \
  oder \"w\" (0x77) um der neuen Temperaturwert zu schreiben.\n\n\r";
 		 HAL_UART_Transmit(&huart1, error, sizeof(error), 100);
-		 continue;
 	  }
 
 	  switch(protocol){
 
-	  case PROTOCOL_WRITE_TEMP:  //Protokoll um Temperatur zu schreiben.
+	  case PROTOCOL_WRITE_TEMP:
 	  {
 		  char c = 0;
 		  uint32_t beforeComma = 0;
@@ -128,20 +127,16 @@ int main(void)
 		  uint32_t counterAfter = 0;
 		  uint32_t digitCntAfter;
 		  uint8_t firstCount = 0;
-		  uint8_t flagError = 0;
 
 		  while(c != LEERTASTE){
 			 //geben sie die Leertaste ein
 			 HAL_UART_Receive(&huart1, &c, 1, 100);
 			 if((c != 0) && (c != LEERTASTE)){
+				 char error[] = "Falsche Taste. Druecken Sie die Leertaste\n\r";
+				 HAL_UART_Transmit(&huart1, error, sizeof(error), 100);
 				 c = 0;
-				 flagError = 1;
-				 break;
 			 }
 		  }
-		  if(flagError)
-			  break;
-
 		  uint8_t commaCount = 0;
 		  while(c != ENTER){
 			 //geben sie den Wert ein
@@ -158,9 +153,10 @@ int main(void)
 					 commaCount++;
 					 if(commaCount > 1){
 						 //invalid
-						 flagError = 1;
+						 char error[] = "Es darf nicht mehr als ein komma geben\n\r";
+						 HAL_UART_Transmit(&huart1, error, sizeof(error), 100);
 						 commaCount = 1;
-						 break;
+						 continue;
 					 }
 				 }else{
 
@@ -177,14 +173,11 @@ int main(void)
 
 			 }else if((c != 0x00) && (c != ENTER)){
 				 //ungültige wert
-				 flagError = 1;
-				 break;
+				 char error[] = "Ungueltige wert. Geben ein gueltige Zahl ein\n\r";
+				 HAL_UART_Transmit(&huart1, error, sizeof(error), 100);
 			 }
 
 		  }
-
-		  if(flagError)
-			  break;
 
 		  digitCntAfter = getDigitCount(afterComma);
 		  float value = beforeComma; // + (afterComma /(10^counterAfter));
@@ -211,7 +204,7 @@ int main(void)
 		  }
 		  break;
 	  }
-	  case PROTOCOL_READ_TEMP:  //Protokoll um die Temperatur zu lesen
+	  case PROTOCOL_READ_TEMP:
 	  {
 		  //Temperatur lesen
 		  char c = 0;
