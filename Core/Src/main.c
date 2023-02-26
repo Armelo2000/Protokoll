@@ -161,8 +161,6 @@ int main(void)
 				 }else{
 
 					 if(commaCount == 0){
-						 uint32_t x = pow(10, counterBefore);
-						 uint32_t y = c - '0';
 						 beforeComma = beforeComma*10 + (c - 0x30);
 						 counterBefore++;
 

@@ -32,7 +32,6 @@ void setTemp(float temp);
  * Funktion um daten von einem ort zum anderen Ort zu kopieren
  **********************************************************************/
 void BufferCopy(void* dst, void* src, int len);
-uint32_t BufferCopyUntil(void* dst, void* src, char endCahr);
 
 /**********************************************************************
  * Diese Funktion gibt die Anzahl von digitale Stellen

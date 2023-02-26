@@ -33,19 +33,6 @@ void BufferCopy(void* dst, void* src, int len){
 	}
 }
 
-uint32_t BufferCopyUntil(void* dst, void* src, char endCahr){
-	char* ptDst = (char*)dst;
-	char* ptSrc = (char*)src;
-	uint32_t len = 0;
-
-	while(*ptSrc != endCahr){
-		*ptDst++ = *ptSrc++;
-		len++;
-	}
-
-	return len;
-}
-
 /**********************************************************************
  * Diese Funktion gibt die Anzahl von digitale Stellen
  * @param: decimal, Zahl den die Anzahl von digit gezählt werden soll
