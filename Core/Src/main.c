@@ -198,16 +198,8 @@ int main(void)
 
 		  setTemp(value);
 		  {
-			uint32_t totalSize = counterBefore + counterAfter + 1;
-			char result[totalSize];
-			char str1[] = "Die Tempeartur wird gesetzt auf ";
-			char str2[] = "°C\n\n\r";
-			decToCharArry(beforeComma, counterBefore, afterComma, counterAfter, result);
-			if(afterComma == 0) totalSize = counterBefore;
+			char str1[] = "Der neuer Tempearturwert wurde gesetzt ";
 			HAL_UART_Transmit(&huart1, str1, sizeof(str1), 100);
-			HAL_UART_Transmit(&huart1, result, totalSize, 100);
-			HAL_UART_Transmit(&huart1, str2, sizeof(str2), 100);
-
 		  }
 		  break;
 	  }
